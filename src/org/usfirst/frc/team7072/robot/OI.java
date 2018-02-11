@@ -20,16 +20,22 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private Joystick pilotController;
+	private Joystick copilotController;
 	
 	public OI() {
 		pilotController = new Joystick(0) ;
+		copilotController = new Joystick(1);
 		
-		Button pilotButtonB = new JoystickButton(pilotController, 1);
+		Button pilotButtonB = new JoystickButton(pilotController, 2);
 		pilotButtonB.whenPressed(new SwapDriveStyle());
 	}
 	
 	public Joystick getPilotController() {
 		return pilotController;
+	}
+	
+	public Joystick getcopilotController() {
+		return copilotController;
 	}
 	
 	//// CREATING BUTTONS

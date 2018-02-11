@@ -12,6 +12,7 @@ public class SwapDriveStyle extends Command {
 		boolean currentDriveStyle = Robot.driveTrain.shouldUseTankControl();
 		
 		Robot.driveTrain.setUseTankControl(! currentDriveStyle);
+		Robot.driveTrain.resetEncoders();
 		super.execute();
 	}
 
