@@ -26,7 +26,7 @@ public class OI {
 		pilotController = new Joystick(0) ;
 		copilotController = new Joystick(1);
 		
-		Button pilotButtonB = new JoystickButton(pilotController, 2);
+		Button pilotButtonB = new JoystickButton(pilotController, 1);
 		pilotButtonB.whenPressed(new SwapDriveStyle());
 	}
 	
@@ -34,7 +34,7 @@ public class OI {
 		return pilotController;
 	}
 	
-	public Joystick getcopilotController() {
+	public Joystick getCopilotController() {
 		return copilotController;
 	}
 	

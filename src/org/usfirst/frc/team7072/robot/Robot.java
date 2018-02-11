@@ -8,11 +8,13 @@
 package org.usfirst.frc.team7072.robot;
 
 import org.usfirst.frc.team7072.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team7072.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends TimedRobot {
 	public static OI oi;
 	public static DriveTrain driveTrain;
+	public static Elevator elevator;
 	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -36,6 +39,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		driveTrain = new DriveTrain();
+		elevator = new Elevator();
 	}
 
 	/**
@@ -67,6 +71,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
+	
 		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -101,6 +106,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		driveTrain.writeToDashboard();
 	}
 
 	/**
