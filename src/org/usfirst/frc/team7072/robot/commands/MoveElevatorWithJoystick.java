@@ -18,12 +18,14 @@ public class MoveElevatorWithJoystick extends Command {
 		
 		double liftValue = Robot.oi.getCopilotController().getRawAxis(RobotMap.rightJoystickYAxis);
 		
-		Robot.elevator.getLiftEncoderPosition();
+		double currentPosition = Robot.elevator.getLiftEncoderPosition();
+		double setpoint = currentPosition + (liftValue * 4096);
 		
-		Robot.elevator.setSetpoint(liftValue * 4096);
+		//TODO: cap setpoint at top and bottom limit
 		
+		Robot.elevator.setSetpoint(setpoint);
 		
-		
+		Robot.elevator.enable();
 	}
 	
 	@Override
