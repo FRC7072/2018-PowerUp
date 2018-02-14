@@ -43,6 +43,8 @@ public class Elevator extends PIDSubsystem {
 		
 		return getLiftEncoderPosition();
 	}
+	
+	//1 rotation of driveshaft = 1.57079632679 ft traveled
 
 	@Override
 	protected void usePIDOutput(double output) {

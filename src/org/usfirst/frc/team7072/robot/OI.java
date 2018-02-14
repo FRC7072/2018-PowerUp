@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team7072.robot;
 
+import org.usfirst.frc.team7072.robot.commands.IntakeCube;
+import org.usfirst.frc.team7072.robot.commands.OutputCube;
 import org.usfirst.frc.team7072.robot.commands.SwapDriveStyle;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -26,8 +28,14 @@ public class OI {
 		pilotController = new Joystick(0) ;
 		copilotController = new Joystick(1);
 		
-		Button pilotButtonB = new JoystickButton(pilotController, 1);
-		pilotButtonB.whenPressed(new SwapDriveStyle());
+		Button pilotButtonA = new JoystickButton(pilotController, 1);
+		pilotButtonA.whenPressed(new SwapDriveStyle());
+		
+		Button copilotButtonA = new JoystickButton(copilotController, 1);
+		copilotButtonA.whenPressed(new IntakeCube(1));
+		
+		Button copilotButtonY = new JoystickButton(copilotController, 4);
+		copilotButtonY.whenPressed(new OutputCube(1));
 	}
 	
 	public Joystick getPilotController() {

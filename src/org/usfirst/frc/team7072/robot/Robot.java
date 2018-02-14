@@ -9,6 +9,7 @@ package org.usfirst.frc.team7072.robot;
 
 import org.usfirst.frc.team7072.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team7072.robot.subsystems.Elevator;
+import org.usfirst.frc.team7072.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	public static DriveTrain driveTrain;
 	public static Elevator elevator;
+	public static Intake intake;
 	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -37,9 +39,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		driveTrain = new DriveTrain();
 		elevator = new Elevator();
+		intake = new Intake();
+		
+		oi = new OI();
 	}
 
 	/**
@@ -107,6 +111,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		driveTrain.writeToDashboard();
+		intake.writeToDashboard();
 	}
 
 	/**
