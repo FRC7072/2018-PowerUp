@@ -6,16 +6,19 @@ import org.usfirst.frc.team7072.robot.commands.MoveElevatorWithJoystick;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 
 public class Elevator extends PIDSubsystem {
 
-	private WPI_TalonSRX liftMotor = new WPI_TalonSRX(RobotMap.liftMotor);	
+	private WPI_TalonSRX liftMotor = new WPI_TalonSRX(RobotMap.liftMotor);
+	
 	
 	public Elevator() {
-		super(0.5, 0, 0);
+		super(-0.02, 5, 0);
 		
 		setAbsoluteTolerance(2048);
 		
@@ -33,9 +36,13 @@ public class Elevator extends PIDSubsystem {
 		liftMotor.setSelectedSensorPosition(0, 0, 0);
 	}
 	
+	public void liftStop() {
+		liftMotor.set(0);
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new MoveElevatorWithJoystick());
+//		setDefaultCommand(new MoveElevatorWithJoystick());
 	}
 
 	@Override
@@ -51,6 +58,10 @@ public class Elevator extends PIDSubsystem {
 		
 		liftMotor.set(output);
 		
+	}
+	
+	public void writeToDashboard() {
+		SmartDashboard.putNumber("Lift Encoder", getLiftEncoderPosition());
 	}
 
 }

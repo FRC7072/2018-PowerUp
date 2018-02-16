@@ -34,4 +34,9 @@ public class AutoMoveElevatorToPosition extends Command {
 		return Robot.elevator.onTarget();
 	}
 
+	@Override
+	protected void end() {
+		Robot.elevator.disable();
+		Robot.elevator.free();
+	}
 }
