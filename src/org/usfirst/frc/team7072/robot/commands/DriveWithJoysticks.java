@@ -24,7 +24,7 @@ public class DriveWithJoysticks extends Command {
 			double leftValue = Robot.oi.getPilotController(). getRawAxis(RobotMap.leftJoystickYAxis);
 			double rightValue = Robot.oi.getPilotController(). getRawAxis(RobotMap.rightJoystickYAxis);
 			
-			Robot.driveTrain.tankDrive(-leftValue/1.5, -rightValue/1.5);
+			Robot.driveTrain.tankDrive(-leftValue, -rightValue);
 		} else {
 			double speed = Robot.oi.getPilotController().getRawAxis(RobotMap.leftJoystickYAxis);
 			double rotation = Robot.oi.getPilotController().getRawAxis(RobotMap.rightJoystickXAxis);

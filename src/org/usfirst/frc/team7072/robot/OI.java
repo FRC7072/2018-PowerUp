@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team7072.robot;
 
+import org.usfirst.frc.team7072.robot.commands.IntakeCube;
+import org.usfirst.frc.team7072.robot.commands.OutputCube;
 import org.usfirst.frc.team7072.robot.commands.AutonomousDriveForward;
 import org.usfirst.frc.team7072.robot.commands.SwapDriveStyle;
 
@@ -27,11 +29,14 @@ public class OI {
 		pilotController = new Joystick(0) ;
 		copilotController = new Joystick(1);
 		
-		Button pilotButtonB = new JoystickButton(pilotController, 2);
-		pilotButtonB.whenPressed(new SwapDriveStyle());
-
 		Button pilotButtonA = new JoystickButton(pilotController, 1);
 		pilotButtonA.whenPressed(new SwapDriveStyle());
+		
+		Button copilotButtonA = new JoystickButton(copilotController, 1);
+		copilotButtonA.whenPressed(new IntakeCube(1));
+		
+		Button copilotButtonY = new JoystickButton(copilotController, 4);
+		copilotButtonY.whenPressed(new OutputCube(1));
 		
 		Button pilotButtonRBump = new JoystickButton(pilotController, RobotMap.joystickRightBumper);
 		pilotButtonRBump.whenPressed(new AutonomousDriveForward(4096 * 5));
@@ -41,7 +46,7 @@ public class OI {
 		return pilotController;
 	}
 	
-	public Joystick getcopilotController() {
+	public Joystick getCopilotController() {
 		return copilotController;
 	}
 	
