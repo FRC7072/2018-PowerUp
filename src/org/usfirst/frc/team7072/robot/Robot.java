@@ -8,7 +8,6 @@
 package org.usfirst.frc.team7072.robot;
 
 import org.usfirst.frc.team7072.robot.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -34,8 +33,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		driveTrain = new DriveTrain();
+		oi = new OI();
 	}
 
 	/**
@@ -67,6 +66,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		
+	
 		
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -101,6 +101,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		driveTrain.writeToDashboard();
 	}
 
 	/**
