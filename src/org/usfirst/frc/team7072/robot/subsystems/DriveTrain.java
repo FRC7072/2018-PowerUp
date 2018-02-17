@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem {
 	
 	private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 	
-	private boolean useTankControl = true;
+	private boolean useTankControl = false;
 	
 	private AHRS gyro;
 	

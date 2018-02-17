@@ -7,10 +7,10 @@
 
 package org.usfirst.frc.team7072.robot;
 
+import org.usfirst.frc.team7072.robot.commands.AutoDriveRotate;
+import org.usfirst.frc.team7072.robot.commands.AutonomousDriveForward;
 import org.usfirst.frc.team7072.robot.commands.IntakeCube;
 import org.usfirst.frc.team7072.robot.commands.OutputCube;
-import org.usfirst.frc.team7072.robot.commands.AutonomousDriveForward;
-import org.usfirst.frc.team7072.robot.commands.SwapDriveStyle;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -30,7 +30,7 @@ public class OI {
 		copilotController = new Joystick(1);
 		
 		Button pilotButtonA = new JoystickButton(pilotController, 1);
-		pilotButtonA.whenPressed(new SwapDriveStyle());
+		pilotButtonA.whenPressed(new AutoDriveRotate(45));
 		
 		Button copilotButtonA = new JoystickButton(copilotController, RobotMap.joystickButtonA);
 		copilotButtonA.whenPressed(new IntakeCube(1));
