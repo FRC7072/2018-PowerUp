@@ -6,31 +6,29 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class IntakeCube extends Command {
 
-	double range;
-	
+
 	public IntakeCube(double range) {
 		requires(Robot.intake);
 		
-		this.range = range;
+
 	}
-	
 	
 	@Override
 	protected void execute() {
-		Robot.intake.leftClaw.set(.4);
-		Robot.intake.rightClaw.set(-.4);
+		Robot.intake.leftClaw.set(-.4);
+		Robot.intake.rightClaw.set(.4);
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return Robot.intake.getRange() <= 3;
+		return Robot.intake.getRange() < 5;
+//		return false;
 	}
 	
 	@Override
 	protected void end() {
-		super.end();
 		Robot.intake.leftClaw.set(0);
 		Robot.intake.rightClaw.set(0);
+		Robot.intake.free();
 	}
-
 }

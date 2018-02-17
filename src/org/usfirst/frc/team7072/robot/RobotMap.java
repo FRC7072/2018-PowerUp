@@ -26,7 +26,7 @@ public class RobotMap {
 	public static final int liftLowerLimitSwitch = 2;
 	public static final int liftUpperLimitSwitch = 3;
 	
-	public static final int leftClaw 		= 15;
+	public static final int leftClaw 		= 16;
 	public static final int rightClaw 		= 17;
 	
 	public static final int leftJoystickYAxis 	= 1;

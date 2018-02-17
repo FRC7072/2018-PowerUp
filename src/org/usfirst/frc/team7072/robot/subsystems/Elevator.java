@@ -38,6 +38,10 @@ public class Elevator extends PIDSubsystem {
 		return lowerLimit.get();
 	}
 	
+	public void moveElevator(double speed) {
+		liftMotor.set(speed);
+	}
+	
 	public void elevatorUp() {
 		if (!getUpperSwitch()) {
 			liftMotor.set(1);	

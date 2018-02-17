@@ -32,14 +32,20 @@ public class OI {
 		Button pilotButtonA = new JoystickButton(pilotController, 1);
 		pilotButtonA.whenPressed(new AutoDriveRotate(45));
 		
+		Button pilotButtonRBump = new JoystickButton(pilotController, RobotMap.joystickRightBumper);
+		pilotButtonRBump.whenPressed(new AutonomousDriveForward(4096 * 5));
+		
+		Button pilotButtonLBumo = new JoystickButton(pilotController, RobotMap.joystickLeftBumper);
+		pilotButtonLBumo.whenPressed(new AutonomousDriveForward(4096 * -5));
+		
+		Button pilotButtonB = new JoystickButton(pilotController, RobotMap.joystickButtonB);
+		pilotButtonB.whenPressed(new AutoDriveRotate(45));
+		
 		Button copilotButtonA = new JoystickButton(copilotController, RobotMap.joystickButtonA);
 		copilotButtonA.whenPressed(new IntakeCube(1));
 		
 		Button copilotButtonY = new JoystickButton(copilotController, 4);
 		copilotButtonY.whenPressed(new OutputCube(1));
-		
-		Button pilotButtonRBump = new JoystickButton(pilotController, RobotMap.joystickRightBumper);
-		pilotButtonRBump.whenPressed(new AutonomousDriveForward(4096 * 5));
 
 	}	
 	public Joystick getPilotController() {

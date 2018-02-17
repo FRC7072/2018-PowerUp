@@ -29,7 +29,7 @@ public class DriveWithJoysticks extends Command {
 			double speed = Robot.oi.getPilotController().getRawAxis(RobotMap.leftJoystickYAxis);
 			double rotation = Robot.oi.getPilotController().getRawAxis(RobotMap.rightJoystickXAxis);
 			
-			Robot.driveTrain.arcadeDrive(-speed, rotation * 0.75);
+			Robot.driveTrain.arcadeDrive(-speed * .75, rotation * 0.75);
 		}
 	}
 	
