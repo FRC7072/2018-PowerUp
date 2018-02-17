@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		driveTrain.writeToDashboard();
 		intake.writeToDashboard();
+		elevator.writeToDashboard();
 	}
 
 	/**

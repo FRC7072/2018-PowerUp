@@ -9,27 +9,38 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ConfigElevator extends Command {
 
+	private boolean bottomedOut = false;
+	
     public ConfigElevator() {
     	requires(Robot.elevator);
     }
-
     // Called just before this Command runs the first time
     protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.elevatorDown();
+    	if (Robot.elevator.getLowerSwitch()) {
+    		bottomedOut = true;
+    		Robot.elevator.resetEncoder();
+    	}
+    	
+    	if (bottomedOut) {
+    		Robot.elevator.elevatorUp();
+    	} else {
+        	Robot.elevator.elevatorDown();
+    	}
 	}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.elevator.getLowerSwitch();
+    	return false;// Robot.elevator.getUpperSwitch();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.resetEncoder();
+    	Robot.elevator.setMaxHeight(Robot.elevator.getLiftEncoderPosition());
+    	
     	Robot.elevator.free();
     }
 

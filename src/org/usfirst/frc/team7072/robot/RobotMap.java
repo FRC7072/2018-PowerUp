@@ -20,9 +20,13 @@ public class RobotMap {
 	public static final int leftFrontMotor 	= 11;
 	public static final int rightBackMotor 	= 12;
 	public static final int rightFrontMotor = 13;
+	
 	public static final int liftMotor 		= 14;
+	
+	public static final int liftLowerLimitSwitch = 2;
+	public static final int liftUpperLimitSwitch = 3;
+	
 	public static final int leftClaw 		= 15;
-			
 	public static final int rightClaw 		= 17;
 	
 	public static final int leftJoystickYAxis 	= 1;

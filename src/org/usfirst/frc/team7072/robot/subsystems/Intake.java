@@ -42,7 +42,6 @@ public class Intake extends Subsystem {
 	
 	public void writeToDashboard() {
 		SmartDashboard.putNumber("Ultrasonic Range", ultrasonic.getRangeInches());
-		System.out.println(getRange());
 	}
 	
 	protected void initDefaultCommand() {

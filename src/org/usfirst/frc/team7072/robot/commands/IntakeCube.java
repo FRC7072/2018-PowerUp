@@ -1,10 +1,8 @@
 package org.usfirst.frc.team7072.robot.commands;
 
-import org.opencv.calib3d.StereoBM;
 import org.usfirst.frc.team7072.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.PIDCommand;
 
 public class IntakeCube extends Command {
 
@@ -19,12 +17,8 @@ public class IntakeCube extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.intake.ultrasonic.isEnabled();
-		
-		if (Robot.intake.ultrasonic.getRangeInches() > 3) {
-			Robot.intake.leftClaw.set(.4);
-			Robot.intake.rightClaw.set(-.4);
-		}
+		Robot.intake.leftClaw.set(.4);
+		Robot.intake.rightClaw.set(-.4);
 	}
 	
 	@Override
