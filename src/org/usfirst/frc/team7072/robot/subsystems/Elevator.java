@@ -2,23 +2,23 @@ package org.usfirst.frc.team7072.robot.subsystems;
 
 
 import org.usfirst.frc.team7072.robot.RobotMap;
-import org.usfirst.frc.team7072.robot.commands.MoveElevatorWithJoystick;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
-
 public class Elevator extends PIDSubsystem {
-
-	private WPI_TalonSRX liftMotor = new WPI_TalonSRX(RobotMap.liftMotor);
+	DigitalInput lowerLimit = new DigitalInput(2);
+	DigitalInput upperLimit = new DigitalInput(3);
 	
+	private WPI_TalonSRX liftMotor = new WPI_TalonSRX(RobotMap.liftMotor);	
 	
 	public Elevator() {
 		super(-0.02, 5, 0);
+		
 		
 		setAbsoluteTolerance(2048);
 		
@@ -26,7 +26,42 @@ public class Elevator extends PIDSubsystem {
 		
 		liftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 	}
+
+	public boolean getUpperSwitch() {
+		return upperLimit.get();
+	}
+
+	public boolean getLowerSwitch() {
+		return lowerLimit.get();
+	}
 	
+//	public boolean setSwitch() {
+//		return counter.get() > 0;
+//	}
+	
+//	public void initializeCounter() {
+//		counter.reset();
+//	}
+	
+	public void elevatorUp() {
+		if (!getUpperSwitch()) {
+			liftMotor.set(1);	
+		} else {
+			elevatorStop();
+		}
+	}
+	
+	public void elevatorDown() {
+		if (!getLowerSwitch()) {
+			liftMotor.set(-1);	
+		} else {
+			elevatorStop();
+		}
+	}
+	
+	public void elevatorStop() {
+		liftMotor.set(0);
+	}
 	
 	public double getLiftEncoderPosition() {
 		return liftMotor.getSelectedSensorPosition(0);

@@ -21,11 +21,11 @@ public class MoveElevatorWithJoystick extends Command {
 		double currentPosition = Robot.elevator.getLiftEncoderPosition();
 		double setpoint = currentPosition + (liftValue * 4096);
 		
-		//TODO: cap setpoint at top and bottom limit
-		
+		//TODO: cap setpoint at top and bottom lim
 		Robot.elevator.setSetpoint(setpoint);
 		
-		Robot.elevator.enable();
+		if(!Robot.elevator.onTarget())
+			Robot.elevator.enable();
 	}
 	
 	@Override

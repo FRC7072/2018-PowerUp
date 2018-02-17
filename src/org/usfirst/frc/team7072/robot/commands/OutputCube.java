@@ -18,8 +18,8 @@ public class OutputCube extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.intake.leftClaw.set(-1);
-		Robot.intake.rightClaw.set(1);
+		Robot.intake.leftClaw.set(-.4);
+		Robot.intake.rightClaw.set(.4);
 	}
 	
 	@Override

@@ -22,8 +22,8 @@ public class IntakeCube extends Command {
 		Robot.intake.ultrasonic.isEnabled();
 		
 		if (Robot.intake.ultrasonic.getRangeInches() > 3) {
-			Robot.intake.leftClaw.set(1);
-			Robot.intake.rightClaw.set(-1);
+			Robot.intake.leftClaw.set(.4);
+			Robot.intake.rightClaw.set(-.4);
 		}
 	}
 	

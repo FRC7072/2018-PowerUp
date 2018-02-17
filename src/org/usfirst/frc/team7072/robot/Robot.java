@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team7072.robot;
 
+import org.usfirst.frc.team7072.robot.commands.ConfigElevator;
 import org.usfirst.frc.team7072.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team7072.robot.subsystems.Elevator;
 import org.usfirst.frc.team7072.robot.subsystems.Intake;
@@ -15,7 +16,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		
+		Scheduler.getInstance().add(new ConfigElevator());
 	}
 
 	/**
