@@ -9,13 +9,12 @@ public class AutonomousDriveForward extends PIDCommand {
 	
 
 	public AutonomousDriveForward(double distance) {
-		super(1, 0, 0);
+		super(-.05, .5, 0);
 		
 		setSetpoint(distance);
-		getPIDController(). setAbsoluteTolerance(distance / 0.10);
+		getPIDController().setAbsoluteTolerance(500);
 		requires(Robot.driveTrain);
 	}
-	
 	
 	@Override
 	protected void initialize() {
@@ -23,23 +22,32 @@ public class AutonomousDriveForward extends PIDCommand {
 		
 		Robot.driveTrain.resetEncoders();
 	}
+  
+	@Override
+	protected void execute() {
+		getPIDController().enable();
+	}
 
 	@Override
 	protected double returnPIDInput() {
-		return Robot.driveTrain.getRightEncoderPosition();
-		
+		return Robot.driveTrain.getLeftEncoderPosition();
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
 		Robot.driveTrain.tankDrive(output, output);
-
 	}
 
 	@Override
 	protected boolean isFinished() {
 		return getPIDController().onTarget();
-		
+	}
+	
+	@Override
+	protected void end() {
+		getPIDController().disable();
+		Robot.driveTrain.free();
+		super.end();
 	}
 
 }

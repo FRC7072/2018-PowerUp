@@ -9,6 +9,7 @@ package org.usfirst.frc.team7072.robot;
 
 import org.usfirst.frc.team7072.robot.commands.IntakeCube;
 import org.usfirst.frc.team7072.robot.commands.OutputCube;
+import org.usfirst.frc.team7072.robot.commands.AutonomousDriveForward;
 import org.usfirst.frc.team7072.robot.commands.SwapDriveStyle;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -36,6 +37,9 @@ public class OI {
 		
 		Button copilotButtonY = new JoystickButton(copilotController, 4);
 		copilotButtonY.whenPressed(new OutputCube(1));
+		
+		Button pilotButtonRBump = new JoystickButton(pilotController, RobotMap.joystickRightBumper);
+		pilotButtonRBump.whenPressed(new AutonomousDriveForward(4096 * 5));
 	}
 	
 	public Joystick getPilotController() {

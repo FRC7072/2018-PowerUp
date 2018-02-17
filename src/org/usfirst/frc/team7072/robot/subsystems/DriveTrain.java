@@ -5,16 +5,15 @@ import org.usfirst.frc.team7072.robot.commands.DriveWithJoysticks;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain extends Subsystem {
-	
 	
 	private WPI_TalonSRX leftBackMotor = new WPI_TalonSRX(RobotMap.leftBackMotor);
 	private WPI_TalonSRX leftFrontMotor = new WPI_TalonSRX(RobotMap.leftFrontMotor);
@@ -28,8 +27,12 @@ public class DriveTrain extends Subsystem {
 	
 	private boolean useTankControl = true;
 	
+	private AHRS gyro;
+	
 	public DriveTrain() {
 //		super("Drive Train", 0.0, 0.0, 0.0);
+		
+		gyro = new AHRS(SPI.Port.kMXP);
 		
 		configureTalons();
 		
@@ -37,14 +40,12 @@ public class DriveTrain extends Subsystem {
 	
 	}
 	
-	
 	@Override
 	protected void initDefaultCommand() {
 		
 		setDefaultCommand(new DriveWithJoysticks());
 
 	}
-	
 
 	private void configureTalons() {
 		
@@ -56,6 +57,14 @@ public class DriveTrain extends Subsystem {
 		leftFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		rightFrontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 	
+	}
+	
+	public double getAngle() {
+		return gyro.getAngle();
+	}
+	
+	public void resetGyro() {
+		gyro.reset();
 	}
 	
 	public double getLeftEncoderPosition() {
@@ -77,8 +86,8 @@ public class DriveTrain extends Subsystem {
 	
  	
 	public void writeToDashboard() {
-		SmartDashboard.putNumber("Right Sensor (Encoder)", rightFrontMotor.getSelectedSensorVelocity(0));
-		SmartDashboard.putNumber("Left Sensor (Encoder)", leftFrontMotor.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Right Sensor (Encoder)", rightFrontMotor.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Left Sensor (Encoder)", leftFrontMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putBoolean("Use Tank Control", useTankControl);
 	}
 	
@@ -86,7 +95,6 @@ public class DriveTrain extends Subsystem {
 		leftFrontMotor.setSelectedSensorPosition(0, 0, 0);
 		rightFrontMotor.setSelectedSensorPosition(0, 0, 0);
 	}
-	
 	
 	public void tankDrive(double leftSpeed, double rightSpeed) {
 		drive.tankDrive(leftSpeed, rightSpeed, true);
@@ -107,5 +115,4 @@ public class DriveTrain extends Subsystem {
 	public void setUseTankControl(boolean useTankControl) {
 		this.useTankControl = useTankControl;
 	}
-	
 }
