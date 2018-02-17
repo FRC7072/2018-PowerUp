@@ -86,8 +86,8 @@ public class DriveTrain extends Subsystem {
 	
  	
 	public void writeToDashboard() {
-		SmartDashboard.putNumber("Right Sensor (Encoder)", rightFrontMotor.getSelectedSensorVelocity(0));
-		SmartDashboard.putNumber("Left Sensor (Encoder)", leftFrontMotor.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Right Sensor (Encoder)", rightFrontMotor.getSelectedSensorPosition(0));
+		SmartDashboard.putNumber("Left Sensor (Encoder)", leftFrontMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putBoolean("Use Tank Control", useTankControl);
 	}
 	
