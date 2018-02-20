@@ -45,4 +45,7 @@ public class RobotMap {
 	public static final int joystickButtonLeftStick 	= 9;
 	public static final int joystickButtonRightStick 	= 10;
 	
+	public static final int frontCamera = 0;
+	public static final int backCamera = 1;
+	
 }

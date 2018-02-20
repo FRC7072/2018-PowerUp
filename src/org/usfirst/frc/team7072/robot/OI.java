@@ -11,6 +11,7 @@ import org.usfirst.frc.team7072.robot.commands.AutoDriveRotate;
 import org.usfirst.frc.team7072.robot.commands.AutonomousDriveForward;
 import org.usfirst.frc.team7072.robot.commands.IntakeCube;
 import org.usfirst.frc.team7072.robot.commands.OutputCube;
+import org.usfirst.frc.team7072.robot.commands.SwitchCamera;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -33,10 +34,10 @@ public class OI {
 		pilotButtonA.whenPressed(new AutoDriveRotate(45));
 		
 		Button pilotButtonRBump = new JoystickButton(pilotController, RobotMap.joystickRightBumper);
-		pilotButtonRBump.whenPressed(new AutonomousDriveForward(4096 * 5));
+		pilotButtonRBump.whenPressed(new SwitchCamera(Robot.frontCamera));
 		
 		Button pilotButtonLBumo = new JoystickButton(pilotController, RobotMap.joystickLeftBumper);
-		pilotButtonLBumo.whenPressed(new AutonomousDriveForward(4096 * -5));
+		pilotButtonLBumo.whenPressed(new SwitchCamera(Robot.backCamera));
 		
 		Button pilotButtonB = new JoystickButton(pilotController, RobotMap.joystickButtonB);
 		pilotButtonB.whenPressed(new AutoDriveRotate(45));
