@@ -20,16 +20,15 @@ public class DriveWithJoysticks extends Command {
 	@Override
 	protected void execute() {
 		super.execute();
-		if (Robot.driveTrain.shouldUseTankControl()) {
-			double leftValue = Robot.oi.getPilotController(). getRawAxis(RobotMap.leftJoystickYAxis);
-			double rightValue = Robot.oi.getPilotController(). getRawAxis(RobotMap.rightJoystickYAxis);
-			
-			Robot.driveTrain.tankDrive(-leftValue, -rightValue);
-		} else {
-			double speed = Robot.oi.getPilotController().getRawAxis(RobotMap.leftJoystickYAxis);
-			double rotation = Robot.oi.getPilotController().getRawAxis(RobotMap.rightJoystickXAxis);
-			
-			Robot.driveTrain.arcadeDrive(-speed * .75, rotation * 0.75);
+
+		double speed = Robot.oi.getPilotController().getRawAxis(RobotMap.leftJoystickYAxis);
+		double rotation = Robot.oi.getPilotController().getRawAxis(RobotMap.rightJoystickXAxis);
+		
+		if (Robot.intake.cubeHasEntered()) {
+			Robot.driveTrain.arcadeDrive(-speed * .35, rotation * 0.5);
+		}
+		else {
+			Robot.driveTrain.arcadeDrive(-speed, rotation * 0.75);
 		}
 	}
 	

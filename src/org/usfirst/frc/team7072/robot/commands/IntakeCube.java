@@ -21,7 +21,7 @@ public class IntakeCube extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return Robot.intake.getRange() < 5;
+		return Robot.intake.cubeHasEntered();
 //		return false;
 	}
 	
