@@ -34,10 +34,10 @@ public class OI {
 		pilotButtonA.whenPressed(new AutoDriveRotate(45));
 		
 		Button pilotButtonRBump = new JoystickButton(pilotController, RobotMap.joystickRightBumper);
-		pilotButtonRBump.whenPressed(new SwitchCamera(Robot.frontCamera));
+		pilotButtonRBump.whenPressed(new SwitchCamera());
 		
 		Button pilotButtonLBumo = new JoystickButton(pilotController, RobotMap.joystickLeftBumper);
-		pilotButtonLBumo.whenPressed(new SwitchCamera(Robot.backCamera));
+		pilotButtonLBumo.whenPressed(new SwitchCamera());
 		
 		Button pilotButtonB = new JoystickButton(pilotController, RobotMap.joystickButtonB);
 		pilotButtonB.whenPressed(new AutoDriveRotate(45));
@@ -45,7 +45,7 @@ public class OI {
 		Button copilotButtonA = new JoystickButton(copilotController, RobotMap.joystickButtonA);
 		copilotButtonA.whenPressed(new IntakeCube(1));
 		
-		Button copilotButtonY = new JoystickButton(copilotController, 4);
+		Button copilotButtonY = new JoystickButton(copilotController, RobotMap.joystickButtonY);
 		copilotButtonY.whenPressed(new OutputCube(1));
 
 	}	

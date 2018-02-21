@@ -35,16 +35,23 @@ public class Elevator extends PIDSubsystem {
 	}
 
 	public boolean getLowerSwitch() {
+		if (lowerLimit.get()) {
+			resetEncoder();
+		}
 		return lowerLimit.get();
 	}
 	
 	public void moveElevator(double speed) {
-		liftMotor.set(speed);
+		SmartDashboard.putNumber("Elevator Speed", speed);
+		if ((getUpperSwitch() && -speed > 0) || (getLowerSwitch() && -speed < 0)) {
+			return;
+		}
+		liftMotor.set(-speed);
 	}
 	
 	public void elevatorUp() {
 		if (!getUpperSwitch()) {
-			liftMotor.set(1);	
+			moveElevator(1);	
 		} else {
 			elevatorStop();
 		}
@@ -52,7 +59,7 @@ public class Elevator extends PIDSubsystem {
 	
 	public void elevatorDown() {
 		if (!getLowerSwitch()) {
-			liftMotor.set(-1);	
+			moveElevator(-1);	
 		} else {
 			elevatorStop();
 		}
@@ -90,13 +97,16 @@ public class Elevator extends PIDSubsystem {
 	@Override
 	protected void usePIDOutput(double output) {
 		
+		if ((getUpperSwitch() && output > 0) || (getLowerSwitch() && output < 0)) {
+			return;
+		}
 		liftMotor.set(output);
-		
 	}
 	
 	public void writeToDashboard() {
 		SmartDashboard.putNumber("Lift Encoder", getLiftEncoderPosition());
 		SmartDashboard.putBoolean("Lower Limit Switch", getLowerSwitch());
+		SmartDashboard.putBoolean("Upper Limit Switch", getUpperSwitch());
 	}
 
 	public double getMaxHeight() {

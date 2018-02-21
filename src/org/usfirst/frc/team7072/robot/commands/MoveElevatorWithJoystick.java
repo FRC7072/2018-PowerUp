@@ -28,12 +28,11 @@ public class MoveElevatorWithJoystick extends Command {
 //		if(!Robot.elevator.onTarget())
 //			Robot.elevator.enable();
 		
-		Robot.elevator.moveElevator(-liftValue);
+		Robot.elevator.moveElevator(liftValue);
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		
 		return false;
 	}
 

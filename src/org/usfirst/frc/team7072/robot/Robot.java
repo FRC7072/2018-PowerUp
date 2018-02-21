@@ -55,7 +55,11 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		
 		frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
+		frontCamera.setResolution(40, 40);
+		frontCamera.setExposureAuto();
 		backCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.backCamera);
+		backCamera.setResolution(40, 40);
+		backCamera.setExposureAuto();
 		cameraServer = CameraServer.getInstance().getServer();
 	}
 

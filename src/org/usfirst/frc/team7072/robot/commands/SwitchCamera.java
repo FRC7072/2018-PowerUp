@@ -1,28 +1,37 @@
 package org.usfirst.frc.team7072.robot.commands;
 
-import org.usfirst.frc.team7072.robot.Robot;
-
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
+/**
+ *
+ */
 public class SwitchCamera extends Command {
-	
-	UsbCamera camera;
-	
-	public SwitchCamera(UsbCamera cam) {
-		camera = cam;
-	}
-	
-	@Override
-	protected void execute() {
-//		Robot.cameraServer.setSource(camera);
-		NetworkTable.getTable("").putString("CameraSelection", camera.getName());
-	}
 
-	@Override
-	protected boolean isFinished() {
-		return true;
-	}
+    public SwitchCamera() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    }
 
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
 }
