@@ -12,6 +12,10 @@ import org.usfirst.frc.team7072.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team7072.robot.subsystems.Elevator;
 import org.usfirst.frc.team7072.robot.subsystems.Intake;
 
+import edu.wpi.cscore.CameraServerJNI;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSink;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -30,9 +34,14 @@ public class Robot extends TimedRobot {
 	public static Elevator elevator;
 	public static Intake intake;
 	
+	public static UsbCamera frontCamera;
+	public static UsbCamera backCamera;
+	public static VideoSink cameraServer;
+	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -44,6 +53,14 @@ public class Robot extends TimedRobot {
 		intake = new Intake();
     
 		oi = new OI();
+		
+		frontCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.frontCamera);
+		frontCamera.setResolution(40, 40);
+		frontCamera.setExposureAuto();
+		backCamera = CameraServer.getInstance().startAutomaticCapture(RobotMap.backCamera);
+		backCamera.setResolution(40, 40);
+		backCamera.setExposureAuto();
+		cameraServer = CameraServer.getInstance().getServer();
 	}
 
 	/**
@@ -101,7 +118,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		Scheduler.getInstance().add(new ConfigElevator());
+//		Scheduler.getInstance().add(new ConfigElevator());
 	}
 
 	/**
@@ -112,6 +129,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		driveTrain.writeToDashboard();
 		intake.writeToDashboard();
+		elevator.writeToDashboard();
 	}
 
 	/**

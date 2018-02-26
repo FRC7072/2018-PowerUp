@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem {
 	
 	private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 	
-	private boolean useTankControl = true;
+	private boolean useTankControl = false;
 	
 	private AHRS gyro;
 	
@@ -89,6 +89,7 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("Right Sensor (Encoder)", rightFrontMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putNumber("Left Sensor (Encoder)", leftFrontMotor.getSelectedSensorPosition(0));
 		SmartDashboard.putBoolean("Use Tank Control", useTankControl);
+		SmartDashboard.putNumber("Gyro", getAngle());
 	}
 	
 	public void resetEncoders() {

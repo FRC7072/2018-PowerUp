@@ -40,9 +40,12 @@ public class Intake extends Subsystem {
 		return ultrasonic.getRangeInches();
 	}
 	
+	public boolean cubeHasEntered() {
+		return getRange() < 5;
+	}
+	
 	public void writeToDashboard() {
 		SmartDashboard.putNumber("Ultrasonic Range", ultrasonic.getRangeInches());
-		System.out.println(getRange());
 	}
 	
 	protected void initDefaultCommand() {

@@ -36,6 +36,8 @@ public class AutoDriveRotate extends PIDCommand{
 
     // Called once after isFinished returns true
     protected void end() {
+    	getPIDController().disable();
+    	Robot.driveTrain.free();
     }
 
     @Override

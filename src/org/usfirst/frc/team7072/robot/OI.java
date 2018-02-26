@@ -7,10 +7,11 @@
 
 package org.usfirst.frc.team7072.robot;
 
+import org.usfirst.frc.team7072.robot.commands.AutoDriveRotate;
+import org.usfirst.frc.team7072.robot.commands.AutonomousDriveForward;
 import org.usfirst.frc.team7072.robot.commands.IntakeCube;
 import org.usfirst.frc.team7072.robot.commands.OutputCube;
-import org.usfirst.frc.team7072.robot.commands.AutonomousDriveForward;
-import org.usfirst.frc.team7072.robot.commands.SwapDriveStyle;
+import org.usfirst.frc.team7072.robot.commands.SwitchCamera;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -30,18 +31,24 @@ public class OI {
 		copilotController = new Joystick(1);
 		
 		Button pilotButtonA = new JoystickButton(pilotController, 1);
-		pilotButtonA.whenPressed(new SwapDriveStyle());
-		
-		Button copilotButtonA = new JoystickButton(copilotController, 1);
-		copilotButtonA.whenPressed(new IntakeCube(1));
-		
-		Button copilotButtonY = new JoystickButton(copilotController, 4);
-		copilotButtonY.whenPressed(new OutputCube(1));
+		pilotButtonA.whenPressed(new AutoDriveRotate(45));
 		
 		Button pilotButtonRBump = new JoystickButton(pilotController, RobotMap.joystickRightBumper);
-		pilotButtonRBump.whenPressed(new AutonomousDriveForward(4096 * 5));
-	}
-	
+		pilotButtonRBump.whenPressed(new SwitchCamera());
+		
+		Button pilotButtonLBumo = new JoystickButton(pilotController, RobotMap.joystickLeftBumper);
+		pilotButtonLBumo.whenPressed(new SwitchCamera());
+		
+		Button pilotButtonB = new JoystickButton(pilotController, RobotMap.joystickButtonB);
+		pilotButtonB.whenPressed(new AutoDriveRotate(45));
+		
+		Button copilotButtonA = new JoystickButton(copilotController, RobotMap.joystickButtonA);
+		copilotButtonA.whenPressed(new IntakeCube(1));
+		
+		Button copilotButtonY = new JoystickButton(copilotController, RobotMap.joystickButtonY);
+		copilotButtonY.whenPressed(new OutputCube(1));
+
+	}	
 	public Joystick getPilotController() {
 		return pilotController;
 	}

@@ -2,6 +2,7 @@ package org.usfirst.frc.team7072.robot.subsystems;
 
 
 import org.usfirst.frc.team7072.robot.RobotMap;
+import org.usfirst.frc.team7072.robot.commands.MoveElevatorWithJoystick;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -11,8 +12,10 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends PIDSubsystem {
-	DigitalInput lowerLimit = new DigitalInput(2);
-	DigitalInput upperLimit = new DigitalInput(3);
+	DigitalInput lowerLimit = new DigitalInput(RobotMap.liftLowerLimitSwitch);
+	DigitalInput upperLimit = new DigitalInput(RobotMap.liftUpperLimitSwitch);
+	
+	private double maxHeight = 0;
 	
 	private WPI_TalonSRX liftMotor = new WPI_TalonSRX(RobotMap.liftMotor);	
 	
@@ -32,20 +35,23 @@ public class Elevator extends PIDSubsystem {
 	}
 
 	public boolean getLowerSwitch() {
+		if (lowerLimit.get()) {
+			resetEncoder();
+		}
 		return lowerLimit.get();
 	}
 	
-//	public boolean setSwitch() {
-//		return counter.get() > 0;
-//	}
-	
-//	public void initializeCounter() {
-//		counter.reset();
-//	}
+	public void moveElevator(double speed) {
+		SmartDashboard.putNumber("Elevator Speed", speed);
+		if ((getUpperSwitch() && -speed > 0) || (getLowerSwitch() && -speed < 0)) {
+			return;
+		}
+		liftMotor.set(-speed);
+	}
 	
 	public void elevatorUp() {
 		if (!getUpperSwitch()) {
-			liftMotor.set(1);	
+			moveElevator(1);	
 		} else {
 			elevatorStop();
 		}
@@ -53,7 +59,7 @@ public class Elevator extends PIDSubsystem {
 	
 	public void elevatorDown() {
 		if (!getLowerSwitch()) {
-			liftMotor.set(-1);	
+			moveElevator(-1);	
 		} else {
 			elevatorStop();
 		}
@@ -77,7 +83,7 @@ public class Elevator extends PIDSubsystem {
 	
 	@Override
 	protected void initDefaultCommand() {
-//		setDefaultCommand(new MoveElevatorWithJoystick());
+		setDefaultCommand(new MoveElevatorWithJoystick());
 	}
 
 	@Override
@@ -91,12 +97,24 @@ public class Elevator extends PIDSubsystem {
 	@Override
 	protected void usePIDOutput(double output) {
 		
+		if ((getUpperSwitch() && output > 0) || (getLowerSwitch() && output < 0)) {
+			return;
+		}
 		liftMotor.set(output);
-		
 	}
 	
 	public void writeToDashboard() {
 		SmartDashboard.putNumber("Lift Encoder", getLiftEncoderPosition());
+		SmartDashboard.putBoolean("Lower Limit Switch", getLowerSwitch());
+		SmartDashboard.putBoolean("Upper Limit Switch", getUpperSwitch());
+	}
+
+	public double getMaxHeight() {
+		return maxHeight;
+	}
+
+	public void setMaxHeight(double d) {
+		this.maxHeight = d;
 	}
 
 }
